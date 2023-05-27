@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>io.sckw.common.code</groupId>
+  <artifactId>common-code-plugin</artifactId>
+  <version>${revision}${sha1}${changelist}</version>
+  <packaging>pom</packaging>
+  <name>common-dependencies</name>
+  <description>Common : Plugins for common code projects</description>
+
+  <properties>
+    <revision>1.0.0</revision>       <!-- MAJOR.MINOR.PATCH -->
+    <sha1></sha1>                    <!-- ReleaseCandidate  -->
+    <changelist></changelist>        <!-- -SNAPSHOT or ""   -->
+
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <flatten-maven-plugin.version>1.5.0</flatten-maven-plugin.version>
+
+  </properties>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>flatten-maven-plugin</artifactId>
+          <version>${flatten-maven-plugin.version}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>flatten-maven-plugin</artifactId>
+        <configuration>
+          <updatePomFile>true</updatePomFile>
+          <flattenMode>resolveCiFriendliesOnly</flattenMode>
+        </configuration>
+        <executions>
+          <execution>
+            <id>flatten</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>flatten</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>flatten.clean</id>
+            <phase>clean</phase>
+            <goals>
+              <goal>clean</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <!-- <distributionManagement>
+    <repository>
+      <id>nexus-releases</id>
+      <url>https://sckw.io:443/repository/maven-releases/</url>
+      <uniqueVersion>false</uniqueVersion>
+    </repository>
+    <snapshotRepository>
+      <id>nexus-snapshots</id>
+      <url>https://sckw.io.com:443/repository/maven-snapshots/</url>
+      <uniqueVersion>true</uniqueVersion>
+    </snapshotRepository>
+  </distributionManagement> -->
+
+</project>
